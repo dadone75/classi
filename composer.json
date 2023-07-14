@@ -1,0 +1,16 @@
+{
+    "name": "davide/classi",
+    "autoload": {
+        "psr-4": {
+            "Davide\\Classi\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "davide"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
