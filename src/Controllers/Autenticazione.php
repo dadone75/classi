@@ -17,6 +17,25 @@ class Autenticazione
 
     }
 
+    public static function logout()
+    {
+        $view_params = [];
+        session_unset();
+
+        header("Location: ".$_ENV['BASE_URL']."/login");
+
+    }
+
+    public static function loginApi(array $request){
+
+        $db = new Mysql();
+
+        $db->loginApi($request["username"],$request["password"]);
+         
+        
+
+    }
+
 
     public static function login(array $request){
 

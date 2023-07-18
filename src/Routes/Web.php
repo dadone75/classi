@@ -1,10 +1,12 @@
 <?php
 
-use Davide\Classi\Controllers\Autenticazione;
 use Davide\Classi\Services\Route;
+use Davide\Classi\Controllers\Meteo;
 use Davide\Classi\Controllers\Utenti;
-use Davide\Classi\Controllers\Controller;
 use Davide\Classi\Controllers\Regular;
+use Davide\Classi\Controllers\Frontend;
+use Davide\Classi\Controllers\Controller;
+use Davide\Classi\Controllers\Autenticazione;
 //ricordati il file .htaccess
 
 
@@ -22,5 +24,10 @@ Route::post("/login",Autenticazione::class,"login");
 Route::get("/vedi",Autenticazione::class,"vedi");
 Route::post("/filtra",Autenticazione::class,"filtra");
 Route::get("/cerca",Utenti::class,"cerca");
+Route::get("/logout",Autenticazione::class,"logout");
+
+
+Route::get("/frontend/login",Frontend::class,"login");
+Route::get("/frontend/meteo",Meteo::class,"meteo");
 
 ?>

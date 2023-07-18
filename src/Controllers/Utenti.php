@@ -52,9 +52,8 @@ class Utenti
         $slug=$params["slug"];
         $db = new Mysql();
 
-       //$var = $db->index($table);
         
-        $var = $db->show($table,$slug);
+        $var = $db->show_slug($table,$slug);
 
         $view_params = ["utente" => $var[0]];
         
@@ -90,6 +89,30 @@ class Utenti
          exit;
     }
 
+    public static function utentiApi(){
+
+        $db = new Mysql();
+        $var = $db->isApiAutenticated();
+        
+
+         if($var===false){
+
+            header("HTTP/1.1 403 Forbidden");
+            exit;
+            
+           }
+
+           $table = "utenti";
+
+           $db = new Mysql();
+   
+           $var = $db->index($table);
+
+           echo json_encode($var);
+
+
+
+    }
 }
 
 ?>
