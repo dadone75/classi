@@ -111,7 +111,7 @@ class Mysql
             if (preg_match('/Bearer\s(\S+)/', $authHeader, $matches)) {
                 $bearerToken = $matches[1];
 
-                $stato = $this->mysqlConnection->prepare("select * from utenti where token=? limit 1");
+                $stato = $this->mysqlConnection->prepare("select * from utenti where token=? and token!='' limit 1");
                 $stato->bind_param("s", $bearerToken);
                 $stato->execute();
         

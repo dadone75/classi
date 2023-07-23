@@ -44,6 +44,8 @@ class Route
     public static function get(string $url, string $controller, string $method,?string $type="number"): void
     
     {
+    
+       
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             
             $request=$_GET;
@@ -59,7 +61,7 @@ class Route
 
         $url_richiesto = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $url_rotta = parse_url($_ENV["BASE_URL"]. $url, PHP_URL_PATH);
-
+       
         ///utenti/(id)
         $array_url_rotta = explode("/", $url_rotta);
         //utenti/variabile numero o stringa esempio /utenti/5
@@ -84,8 +86,9 @@ class Route
 
                 if ($value == $array_url_rotta[$index]) {
                    
-                } else if (substr($array_url_rotta[$index], 0, 1) == "(" && ((($type=="number" || $type=="float")  && (is_numeric($value) == true || is_float($value) == true)) || ($type=="string" && !is_numeric($value) && is_string($value) == true))) {
-                   
+               // } else if (substr($array_url_rotta[$index], 0, 1) == "(" && ((($type=="number" || $type=="float")  && (is_numeric($value) == true || is_float($value) == true)) || ($type=="string" && !is_numeric($value) && is_string($value) == true))) {
+           } else if (substr($array_url_rotta[$index], 0, 1) == "(" && (($type=="number" && is_numeric($value) == true) || ($type=="float" && is_numeric($value) == true) || ($type=="string" && !is_numeric($value) && is_string($value) == true))) {
+                      
                  
                     //entro qui quando il valore dell'indice dell'array non è lo stesso
                     //perchè da una parte ho (id) e dall'altra ho il valore numerico ad esempio 5
@@ -95,7 +98,7 @@ class Route
                     //guarda la variabile passata dalla pagina index.php per richiamare un utente
                     //viene passata la variabie subito dopo utenti/
                     $params[substr($array_url_rotta[$index], 1, -1)] = $value;
-
+                    
                 } else {
                     
                     //se rotta e url non sono uguali non chiami il metodo
@@ -110,7 +113,7 @@ class Route
             //è la if fatta con l'operatore ternario 
             //non apro if tonde o graffe ma metto la condizione fino a ?. quindi eseguo l'istruzione se vero. dopo i : eseguo else
             //non chiudo con le graffe
-            
+          
             $params != [] ? $controller::$method($request,$params) : $controller::$method($request);
 
         }

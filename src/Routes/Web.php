@@ -1,5 +1,6 @@
 <?php
 
+use Davide\Classi\Controllers\Binance;
 use Davide\Classi\Services\Route;
 use Davide\Classi\Controllers\Meteo;
 use Davide\Classi\Controllers\Utenti;
@@ -29,5 +30,5 @@ Route::get("/logout",Autenticazione::class,"logout");
 
 Route::get("/frontend/login",Frontend::class,"login");
 Route::get("/frontend/meteo",Meteo::class,"meteo");
-
+Route::get("/frontend/binance",Binance::class,"binance");
 ?>
